@@ -2,13 +2,16 @@
 import base64
 
 from mailparser import parse_from_file_msg
+from extract_msg import Message as ExtractMsg
 
 
 class Msg:
     def __init__(self, filepath):
         self.message = self.__parse(filepath)
+        self.__msg = ExtractMsg(filepath)
         self.subject = self.__get_subject()
         self.html = self.__get_html()
+        self.html_to_text = self.__clean_html()
         self.text = self.__get_text()
         self.attachments = self.__get_attachments()
         self.headers = self.__get_headers()
@@ -27,6 +30,9 @@ class Msg:
     def __get_html(self):
         html = self.message.body.split('--- mail_boundary ---')[1]
         return html
+
+    def __clean_html(self):
+        return self.__msg.body
 
     def __get_text(self):
         txt = self.message.body.split('--- mail_boundary ---')[0]
