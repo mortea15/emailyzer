@@ -10,3 +10,4 @@ IP_REGEX = r'(?:^|\b(?<!\.))(?:1?\d?\d|2[0-4]\d|25[0-5])(?:\.(?:1?\d?\d|2[0-4]\d
 HTML_SCRIPT_REGEX = r'<style.*?>(.|\s|\S)*?</style>'
 NON_ALPHANUM_REGEX = r'[^a-zA-Z0-9 -—`\'’:;\\n]'
 MULTI_BLANK_REGEX = r'(\s{2,})'
+HTML_RTF_REGEX = r"((\\b)?)?(({)?(\\)?((rtf)?|(ansi(\w{1,})?)|((from)?html(tag)?)|(fbidis)|(deff)|(fonttbl)|(par(d)?)|(lang)|(f(\d{1,}|swiss|charset|modern|nil|s)))(\d{1,})?([{};\"*])?){1,}(('a){1,}|uc|deftab{1,})?((Arial|Courier New|Times New Roman|Symbol|Tahoma|Segoe UI){1,})?((colortbl|red|green|blue|plain){1,})?(([<>]{1,}))?((from)?(html)(tag)?|(ansi)(cpg)?|(par(d)?)|(lang)|(fbidis)|(deff)|(font)(tbl)?|(f(swiss|charset|\d{1,}|modern|nil|s\d{1,}){1,})|line|b|qc|qj|uldb){0,}"

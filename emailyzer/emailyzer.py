@@ -13,13 +13,14 @@ def from_eml(filepath):
 
 
 def from_file(filepath):
-    if 'msg' in filepath:
+    try:
         return from_msg(filepath)
-    elif 'eml' in filepath:
+    except Exception as e:
+        pass
+    try:
         return from_eml(filepath)
-    else:
-        return None
-
+    except Exception as e:
+        pass
 
 """
 fp = 'tests/emails/lastpass-phishing.'
