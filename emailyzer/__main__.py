@@ -7,7 +7,7 @@ import sys
 import emailyzer
 from emailyzer.helpers.utils import (print_attachments, print_body, print_from,
                                      print_headers, print_html, print_subject,
-                                     print_to)
+                                     print_to, save_attachments)
 
 current = os.path.realpath(os.path.dirname(__file__))
 
