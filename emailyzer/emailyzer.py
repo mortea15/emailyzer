@@ -21,11 +21,3 @@ def from_file(filepath):
         return from_eml(filepath)
     except Exception as e:
         pass
-
-"""
-fp = 'tests/emails/lastpass-phishing.'
-e = from_eml(fp + 'eml)
-eml = e.create_email()
-m = from_msg(fp + 'msg')
-msg = m.create_email()
-"""
