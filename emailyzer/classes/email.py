@@ -158,6 +158,8 @@ class Email(object):
         """
         Returns the text html parts of the email as plain text
         """
+        if type(self.message) == Msg:
+            return clean(self._message.html_to_text)
         return clean(self.__html)
 
     @property
