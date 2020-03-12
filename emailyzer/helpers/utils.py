@@ -1,4 +1,10 @@
+
+import os
+from pathlib import Path
+
 from emailyzer.helpers.save_attachments import save_all
+
+
 def print_body(email):
     print(email.html_as_text)
 
@@ -27,3 +33,15 @@ def print_subject(email):
 def save_attachments(email):
     fnames = save_all(email.attachments)
     return fnames
+
+def get_blacklist():
+    blacklist = []
+    try:
+        filepath = Path().home() / '.blacklisted'
+        with open(filepath, 'r') as f:
+            blacklist = f.readlines()
+    except FileNotFoundError:
+        blacklist = os.getenv('BLACKLISTED_STRINGS')
+        if blacklist:
+            blacklist = blacklist.split('|')
+    return blacklist
