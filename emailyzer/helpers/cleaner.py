@@ -4,7 +4,7 @@ import re
 from bs4 import BeautifulSoup as bs
 
 import emailyzer.helpers.regex as REGEX
-
+from emailyzer.helpers.const import BLACKLISTED_STRINGS
 
 def clean(raw_html):
     no_tags = clean_html(raw_html)
@@ -12,7 +12,18 @@ def clean(raw_html):
     no_nl = clean_nl(no_dirt)
     no_rtf_tags = clean_rtf(no_nl)
     clean = clean_non_alphanum(no_nl)
+    if BLACKLISTED_STRINGS:
+        clean = clean_blacklisted(clean)
     return clean.strip()
+
+
+def clean_blacklisted(text):
+    try:
+        for string in BLACKLISTED_STRINGS:
+            text = text.replace(string, '')
+    except Exception:
+        return text
+    return text
 
 
 def clean_rtf(text):
