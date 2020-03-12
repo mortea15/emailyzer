@@ -6,7 +6,7 @@ __contact__ = 'm.amundsen@sportradar.com'
 
 from setuptools import find_packages, setup
 
-version = '0.2.0'
+version = '0.2.1'
 long_desc = '''emailyzer -- a parser from .eml and .msg email files
 with a focus extracting features relevant for email analysis.
 '''.lstrip()
