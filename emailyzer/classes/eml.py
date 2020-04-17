@@ -25,10 +25,23 @@ class Eml:
         return self.message.get('Subject')
 
     def __get_html(self):
-        return self.message.get_body(preferencelist=('html')).get_content()
+        try:
+            return self.message.get_body(preferencelist=('html')).get_content()
+        except AttributeError:
+            body = self.message.get_body().get_content()
+            if body.startswith('    Date: '):
+                try:
+                    body = body.split('|', 1)[1]
+                except ValueError:
+                    body = body.split('>', 1)[1]
+
+            return body
 
     def __get_text(self):
-        return self.message.get_body(preferencelist=('plain')).get_content()
+        try:
+            return self.message.get_body(preferencelist=('plain')).get_content()
+        except Exception:
+            return ''
 
     def __get_attachments(self):
         attachments = []
@@ -74,9 +87,17 @@ class Eml:
             for h in self.headers.get('Received'):
                 if 'envelope-from' in h:
                     s = h.split('envelope-from')[1]
-                    e = s.index('>)')
-                    at = s.index('@')
-                    efd = s[at + 1:e]
-                    return efd
+                    try:
+                        e = s.index('>)')
+                    except ValueError:
+                        e = s.index(')')
+                    except Exception:
+                        e = None
+                    if s and e:
+                        at = s.index('@')
+                        efd = s[at + 1:e]
+                        return efd
+                    else:
+                        return None
         else:
             return None
