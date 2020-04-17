@@ -10,7 +10,7 @@ def clean(raw_html):
     no_tags = clean_html(raw_html)
     no_dirt = clean_dirt(no_tags)
     no_nl = clean_nl(no_dirt)
-    no_rtf_tags = clean_rtf(no_nl)
+    #no_rtf_tags = clean_rtf(no_nl)
     clean = clean_non_alphanum(no_nl)
     if BLACKLISTED_STRINGS:
         clean = clean_blacklisted(clean)
@@ -48,7 +48,7 @@ def clean_dirt(text):
 
 
 def clean_html(raw_html):
-    raw_html = re.sub(REGEX.HTML_SCRIPT_REGEX, ' ', raw_html, 0, re.MULTILINE)
+    #no_script = re.sub(REGEX.HTML_SCRIPT_REGEX, ' ', raw_html, 0, re.MULTILINE)
     no_html = bs(raw_html, 'lxml').text
     h = html.parser.HTMLParser()
     return h.unescape(no_html)
