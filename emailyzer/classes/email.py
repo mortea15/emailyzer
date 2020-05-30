@@ -55,6 +55,7 @@ class Email(object):
         self.__dkim_domain = self._message.dkim_domain
         self.__envelope_domain = self._message.envelope_domain
         self.__hosts = find_hosts(self)
+        self.__filepath = self._message.filepath
 
     @property
     def subject(self):
@@ -175,3 +176,10 @@ class Email(object):
         Returns the message (<Msg> or <Eml>) object that was created from the file
         """
         return self._message
+
+    @property
+    def filepath(self):
+        """
+        Returns the local filepath of the Message file
+        """
+        return self.__filepath

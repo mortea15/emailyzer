@@ -20,6 +20,7 @@ class Msg:
         self.content_type = self.__get_content_type()
         self.dkim_domain = self.__get_dkim_domain()
         self.envelope_domain = self.__get_envelope_domain()
+        self.filepath = filepath
 
     def __parse(self, filepath):
         return parse_from_file_msg(filepath)
